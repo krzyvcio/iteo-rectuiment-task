@@ -55,4 +55,15 @@ class ClientBalanceService implements ClientBalanceServiceInterface
 
         return $clientBalance->getBalance() >= $amount;
     }
+
+    public function getBalance(ClientId $clientId): float
+    {
+        $clientBalance = $this->getClientBalance($clientId);
+
+        if ($clientBalance === null) {
+            throw new \InvalidArgumentException('Client balance not found');
+        }
+
+        return $clientBalance->getBalance();
+    }
 }

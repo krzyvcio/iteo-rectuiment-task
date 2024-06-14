@@ -10,8 +10,9 @@ class ClientBalance
     #[ORM\Id, ORM\Column(type: "string")]
     private string $id;
 
-    #[ORM\Column(type: "uuid")]
-    private string $clientId;
+
+    #[ORM\Column(type: "uuid", unique: true)]
+    private ClientId $clientId;
 
     #[ORM\Column(type: "float")]
     private float $balance = 0.0;
@@ -26,8 +27,8 @@ class ClientBalance
     private \DateTime $createdAt;
 
     public function __construct(
-        string $id,
-        string $clientId,
+        string   $id,
+        ClientId $clientId,
 
     )
     {
@@ -40,7 +41,7 @@ class ClientBalance
         return $this->id;
     }
 
-    public function getClientId(): string
+    public function getClientId(): ClientId
     {
         return $this->clientId;
     }

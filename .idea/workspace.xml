@@ -4,12 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="ClientBalance entity">
-      <change afterPath="$PROJECT_DIR$/src/Domain/Model/Client/ClientId.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Domain/Repository/ClientBalanceRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Domain/Service/ClientBalanceServiceInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Doctrine/Repository/ClientBalanceRepository.php" afterDir="false" />
+    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="intefaces and models">
+      <change afterPath="$PROJECT_DIR$/src/Application/Command/PlaceOrderCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Application/Service/OrderService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Model/Client/Client.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Model/Product/ProductId.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Http/Controller/OrderController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Repository/OrderRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/Domain/Repository/ClientBalanceRepositoryTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tests/Domain/Service/ClientBalanceService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Repository/ClientBalanceRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Repository/ClientBalanceRepositoryInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Service/ClientBalanceService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Service/ClientBalanceService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Doctrine/Repository/ClientBalanceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Doctrine/Repository/ClientBalanceRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +161,36 @@
       <path value="$PROJECT_DIR$/nazwa-projektu/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/nazwa-projektu/vendor/symfony/framework-bundle" />
       <path value="$PROJECT_DIR$/nazwa-projektu/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -158,26 +201,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/michal/projekty/iteo-rectuiment-task&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "PHPUnit.ClientBalanceRepositoryTest.executor": "Debug",
+    "PHPUnit.ClientBalanceRepositoryTest.testFindById.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/michal/projekty/iteo-rectuiment-task",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "php.override.implement.member.chooser.php.doc": "NONE",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Infrastructure/Http/Controller" />
       <recent name="$PROJECT_DIR$" />
     </key>
+  </component>
+  <component name="RunManager" selected="PHPUnit.ClientBalanceRepositoryTest.testFindById">
+    <configuration name="ClientBalanceRepositoryTest.testFindById" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Domain\Repository\ClientBalanceRepositoryTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/src/Tests/Domain/Repository/ClientBalanceRepositoryTest.php" method="testFindById" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.ClientBalanceRepositoryTest.testFindById" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -198,7 +260,7 @@
       <workItem from="1718360140707" duration="351000" />
       <workItem from="1718360510477" duration="257000" />
       <workItem from="1718360776487" duration="529000" />
-      <workItem from="1718361319025" duration="6091000" />
+      <workItem from="1718361319025" duration="10342000" />
     </task>
     <task id="LOCAL-00001" summary="INIT">
       <option name="closed" value="true" />
@@ -232,7 +294,47 @@
       <option name="project" value="LOCAL" />
       <updated>1718369829741</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ClientBalanceService &amp; ClientBalanceRepository">
+      <option name="closed" value="true" />
+      <created>1718371116254</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718371116254</updated>
+    </task>
+    <task id="LOCAL-00006" summary="change in entity">
+      <option name="closed" value="true" />
+      <created>1718371499663</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1718371499663</updated>
+    </task>
+    <task id="LOCAL-00007" summary="change in entity 2">
+      <option name="closed" value="true" />
+      <created>1718371885859</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1718371885859</updated>
+    </task>
+    <task id="LOCAL-00008" summary="ClientBalanceService and fix entity ClientBalance">
+      <option name="closed" value="true" />
+      <created>1718372038660</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1718372038660</updated>
+    </task>
+    <task id="LOCAL-00009" summary="intefaces and models">
+      <option name="closed" value="true" />
+      <created>1718373853450</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1718373853450</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +343,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="INIT" />
     <MESSAGE value="ClientBalance entity" />
-    <option name="LAST_COMMIT_MESSAGE" value="ClientBalance entity" />
+    <MESSAGE value="ClientBalanceService &amp; ClientBalanceRepository" />
+    <MESSAGE value="change in entity" />
+    <MESSAGE value="change in entity 2" />
+    <MESSAGE value="ClientBalanceService and fix entity ClientBalance" />
+    <MESSAGE value="intefaces and models" />
+    <option name="LAST_COMMIT_MESSAGE" value="intefaces and models" />
   </component>
 </project>

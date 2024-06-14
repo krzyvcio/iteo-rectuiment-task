@@ -30,4 +30,10 @@ class ClientBalanceRepository extends ServiceEntityRepository implements ClientB
     {
         $this->getEntityManager()->flush();
     }
+
+    public function delete(ClientBalance $clientBalance): void
+    {
+        $this->getEntityManager()->remove($clientBalance);
+        $this->getEntityManager()->flush();
+    }
 }
