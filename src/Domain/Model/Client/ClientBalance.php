@@ -11,7 +11,7 @@ class ClientBalance
     private string $id;
 
     #[ORM\Column(type: "uuid")]
-    private string $clientId; //uuid
+    private ClientId $clientId;
 
     #[ORM\Column(type: "float")]
     private float $balance = 0.0;
@@ -26,13 +26,13 @@ class ClientBalance
     private \DateTime $createdAt;
 
     public function __construct(
-        string $id,
-        string $clientId,
+        string   $id,
+        ClientId $clientId,
 
     )
     {
         $this->id = $id;
-        $this->clientId = $clientId;
+        $this->clientId = ClientId::generate();
     }
 
     public function getId(): string
@@ -42,12 +42,17 @@ class ClientBalance
 
     public function getClientId(): string
     {
-        return $this->clientId;
+        return $this->clientId->toString();
     }
 
     public function getBalance(): float
     {
         return $this->balance;
+    }
+
+    public function addBalance(float $amount): void
+    {
+        $this->balance += $amount;
     }
 
     public function getCurrency(): string
@@ -78,5 +83,10 @@ class ClientBalance
     public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function subtractBalance(float $amount)
+    {
+        $this->balance -= $amount;
     }
 }
