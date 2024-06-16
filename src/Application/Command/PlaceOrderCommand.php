@@ -2,49 +2,39 @@
 
 namespace App\Application\Command;
 
-use Ramsey\Uuid\UuidInterface;
+use App\Domain\Model\Order\Order;
 
 class PlaceOrderCommand
 {
-    private UuidInterface $orderId;
-    private UuidInterface $clientId;
-    private array $products;
+    private Order $order;
 
-    public function __construct(UuidInterface $orderId, UuidInterface $clientId, array $products)
+    public function __construct(Order $order)
     {
-        $this->orderId = $orderId;
-        $this->clientId = $clientId;
-        $this->products = $products;
+        $this->order = $order;
     }
 
-    public function getOrderId(): UuidInterface
+    public function getOrder(): Order
     {
-        return $this->orderId;
+        return $this->order;
     }
 
-    public function getClientId(): UuidInterface
+    public function getOrderId(): string
     {
-        return $this->clientId;
+        return $this->order->getId()->toString();
     }
 
-    public function getProducts(): array
+    public function getProducts()
     {
-        return $this->products;
-    }
-
-    public static function fromArray(array $data): self
-    {
-        return new self(
-            \Ramsey\Uuid\Uuid::fromString($data['orderId']),
-            \Ramsey\Uuid\Uuid::fromString($data['clientId']),
-            array_map(function ($productData) {
-                return [
-                    'productId' => $productData['productId'],
-                    'quantity' => $productData['quantity'],
-                    'price' => $productData['price'],
-                    'weight' => $productData['weight'],
-                ];
-            }, $data['products'])
-        );
+        $products = [];
+        foreach ($this->order->getItems() as $item) {
+            $products[] = [
+                'productId' => $item->getProductId()->toString(),
+                'quantity' => $item->getQuantity(),
+                'price' => $item->getPrice(),
+                'weight' => $item->getWeight(),
+                'subtotal' => $item->getSubtotal()
+            ];
+        }
+        return $products;
     }
 }

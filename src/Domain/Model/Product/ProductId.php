@@ -7,7 +7,7 @@ use Ramsey\Uuid\UuidInterface;
 
 class ProductId
 {
-    private UuidInterface $id;
+    private UuidInterface $id; //zakładamy, że identyfikator produktu to UUID
 
     private function __construct(UuidInterface $id)
     {

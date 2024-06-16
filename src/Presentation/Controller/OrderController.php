@@ -2,15 +2,14 @@
 
 namespace App\Presentation\Controller;
 
+use App\Application\Command\PlaceOrderCommand;
 use App\Application\Service\OrderService;
-use App\Domain\Model\Order\Order;
-use App\Domain\Model\Order\OrderId;
+use App\Domain\Validator\OrderValidator;
+use App\Presentation\Validator\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Validation;
 
 class OrderController extends AbstractController
 {
@@ -23,42 +22,31 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/api/orders", methods={"POST"})
+     * @throws ValidationException
      */
     public function createOrder(Request $request): Response
     {
-        $data = json_decode($request->getContent(), true);
+        try {
+            $data = json_decode($request->getContent(), true);
 
-        $validator = Validation::createValidator();
-        $constraint = new Assert\Collection([
-            'id' => new Assert\Uuid(),
-            'clientId' => new Assert\Uuid(),
-            'items' => new Assert\All([
-                new Assert\Collection([
-                    'id' => new Assert\Uuid(),
-                    'quantity' => new Assert\GreaterThan(0),
-                ]),
-            ]),
-        ]);
+            OrderValidator::validate($data);
 
-        $violations = $validator->validate($data, $constraint);
 
-        if (count($violations) > 0) {
-            $errors = [];
-            foreach ($violations as $violation) {
-                $errors[] = $violation->getMessage();
-            }
+            $orderCommand = new PlaceOrderCommand(
+                $this->orderService->createOrder($data)
+            );
+            //sprawdzenie zamowienia klienta
 
-            return new Response(json_encode($errors), Response::HTTP_BAD_REQUEST);
+            // jesli poprawne to odejmujemy od salda
+
+            //jesli nie to blokujemy klienta
+
+            return new Response('Order placed', Response::HTTP_CREATED);
+        } catch (
+        ValidationException $e
+        ) {
+            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
 
-        $order = new Order(
-            OrderId::fromString($data['id']),
-            $data['clientId'],
-            $data['items']
-        );
-
-        $this->orderService->placeOrder($order);
-
-        return new Response('', Response::HTTP_CREATED);
     }
 }

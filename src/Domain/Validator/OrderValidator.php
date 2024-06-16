@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Validation;
 
 class OrderValidator
 {
-    public function validate(Order $order): void
+    public static function validate(Order $order): void
     {
         $validator = Validation::createValidator();
         $constraint = new Assert\Collection([

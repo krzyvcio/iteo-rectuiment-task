@@ -91,4 +91,15 @@ class OrderService
 
         return true;
     }
+
+    public function createOrder(array $data): Order
+    {
+        return new Order(
+            OrderId::fromString($data['id']),
+            $data['clientId'],
+            $data['items']
+        );
+    }
+
+
 }
