@@ -27,4 +27,9 @@ class PlaceOrderCommandFactory
 
         return new PlaceOrderCommand($orderId, $clientId, $items);
     }
+
+    public function createFromOrder(\App\Domain\Model\Order\Order $order): PlaceOrderCommand
+    {
+        return new PlaceOrderCommand($order->getId(), $order->getClientId(), $order->getItems());
+    }
 }

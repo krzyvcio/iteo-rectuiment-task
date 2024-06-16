@@ -27,12 +27,9 @@ class ClientBalance
     private \DateTime $createdAt;
 
     public function __construct(
-        string   $id,
         ClientId $clientId,
-
     )
     {
-        $this->id = $id;
         $this->clientId = $clientId;
     }
 

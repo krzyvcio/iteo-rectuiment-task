@@ -77,8 +77,10 @@ class OrderService
         $this->clientBalanceService->subtractBalance($clientId, $totalPrice);
         $this->orderRepository->save($order);
 
-        // TODO: Send order to CRM system
+        // TODO: Send order to CRM system as event
+        $this->eventDispatcher->dispatch(new OrderPlacedEvent($order));
     }
+
 
     private function isOrderValid(Order $order): bool
     {
@@ -88,6 +90,7 @@ class OrderService
             return false;
         }
 
+        // summary weight of all products in order
         $totalWeight = 0;
         foreach ($orderItems as $orderItem) {
             $totalWeight += $orderItem->getWeight() * $orderItem->getQuantity();
@@ -99,21 +102,4 @@ class OrderService
 
         return true;
     }
-
-    public function createOrder(array $data): Order
-    {
-        return new Order(
-            OrderId::fromString($data['id']),
-            $data['clientId'],
-            $data['items']
-        );
-    }
-
-
-    public function handleOrder(Order $order): void
-    {
-        //todo
-    }
-
-
 }

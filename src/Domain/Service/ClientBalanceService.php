@@ -25,7 +25,8 @@ class ClientBalanceService implements ClientBalanceServiceInterface
         $clientBalance = $this->getClientBalance($clientId);
 
         if ($clientBalance === null) {
-            $clientBalance = new ClientBalance($clientId->toString(), $amount);
+            $clientBalance = new ClientBalance($clientId);
+            $clientBalance->addBalance($amount);
             $this->clientBalanceRepository->save($clientBalance);
         } else {
             $clientBalance->addBalance($amount);

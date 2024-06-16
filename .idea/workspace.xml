@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="zaczyna to wyglądać okej">
-      <change afterPath="$PROJECT_DIR$/src/Application/Factory/PlaceOrderCommandFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Domain/Exception/InsufficientBalanceException.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Domain/Exception/InvalidOrderDataException.php" afterDir="false" />
+    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="testCreateFromArray">
+      <change afterPath="$PROJECT_DIR$/src/Application/Service/CrmOrderService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Event/OrderPlacedEvent.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Messaging/EventSubscriber/SendOrderToCrmSubscriber.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Presentation/Controller/CrmResponseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Command/PlaceOrderCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Command/PlaceOrderCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Factory/PlaceOrderCommandFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Factory/PlaceOrderCommandFactory.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Application/Service/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Service/OrderService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Domain/Model/Order/OrderId.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Order/OrderId.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Domain/Validator/OrderValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Validator/OrderValidator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Http/Controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Http/Controller/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Service/ClientBalanceService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Service/ClientBalanceService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,6 +196,8 @@
   "keyToString": {
     "PHPUnit.ClientBalanceRepositoryTest.executor": "Debug",
     "PHPUnit.ClientBalanceRepositoryTest.testFindById.executor": "Run",
+    "PHPUnit.PlaceOrderCommandFactoryTest.executor": "Run",
+    "PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArray.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/home/michal/projekty/iteo-rectuiment-task",
@@ -217,7 +219,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.ClientBalanceRepositoryTest.testFindById">
+  <component name="RunManager" selected="PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArray">
     <configuration name="ClientBalanceRepositoryTest.testFindById" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Domain\Repository\ClientBalanceRepositoryTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/src/Tests/Domain/Repository/ClientBalanceRepositoryTest.php" method="testFindById" scope="Method" />
       <method v="2" />
@@ -226,8 +228,18 @@
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
+    <configuration name="PlaceOrderCommandFactoryTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Application\Factory\PlaceOrderCommandFactoryTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Application/Factory/PlaceOrderCommandFactoryTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PlaceOrderCommandFactoryTest.testCreateFromArray" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Application\Factory\PlaceOrderCommandFactoryTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Application/Factory/PlaceOrderCommandFactoryTest.php" method="testCreateFromArray" scope="Method" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArray" />
+        <item itemvalue="PHPUnit.PlaceOrderCommandFactoryTest" />
         <item itemvalue="PHPUnit.ClientBalanceRepositoryTest.testFindById" />
       </list>
     </recent_temporary>
@@ -252,7 +264,7 @@
       <workItem from="1718360510477" duration="257000" />
       <workItem from="1718360776487" duration="529000" />
       <workItem from="1718361319025" duration="10642000" />
-      <workItem from="1718434257930" duration="10906000" />
+      <workItem from="1718434257930" duration="14394000" />
     </task>
     <task id="LOCAL-00001" summary="INIT">
       <option name="closed" value="true" />
@@ -366,7 +378,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718527604433</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="testy były złe">
+      <option name="closed" value="true" />
+      <created>1718527736430</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1718527736430</updated>
+    </task>
+    <task id="LOCAL-00016" summary="testCreateFromArray">
+      <option name="closed" value="true" />
+      <created>1718528066215</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1718528066215</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,6 +412,19 @@
     <MESSAGE value="order changes" />
     <MESSAGE value="changes" />
     <MESSAGE value="zaczyna to wyglądać okej" />
-    <option name="LAST_COMMIT_MESSAGE" value="zaczyna to wyglądać okej" />
+    <MESSAGE value="testy były złe" />
+    <MESSAGE value="testCreateFromArray" />
+    <option name="LAST_COMMIT_MESSAGE" value="testCreateFromArray" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Application/Service/CrmOrderService.php</url>
+          <line>37</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
