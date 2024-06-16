@@ -41,12 +41,7 @@ class CrmOrderService
             throw new \InvalidArgumentException('Invalid response status');
         }
 
-        self::validateOrderResponse($data);
-
-        $clientId = $data['clientId'] ?? null;
-        $name = $data['name'] ?? null;
-        $balance = $data['balance'] ?? null;
-
+        //
     }
 
 
