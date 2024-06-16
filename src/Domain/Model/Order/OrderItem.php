@@ -9,7 +9,7 @@ class OrderItem
     private ProductId $productId;
     private int $quantity;
     private float $price;
-    private float $weight;
+    private float $weight; // kilogramy jako jednostka
 
     public function __construct(ProductId $productId, int $quantity, float $price, float $weight)
     {

@@ -3,12 +3,16 @@
 namespace App\Domain\Validator;
 
 use App\Domain\Model\Order\Order;
+use App\Presentation\Validator\ValidationException;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validation;
 
 class OrderValidator
 {
-    public static function validate(Order $order): void
+    /**
+     * @throws ValidationException
+     */
+    public function validate(Order $order): void
     {
         $validator = Validation::createValidator();
         $constraint = new Assert\Collection([

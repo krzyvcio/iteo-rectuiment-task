@@ -47,4 +47,13 @@ class Order
         }
         return $totalPrice;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id->toString(),
+            'clientId' => $this->clientId->toString(),
+            'items' => array_map(fn(OrderItem $item) => $item->toArray(), $this->items),
+        ];
+    }
 }
