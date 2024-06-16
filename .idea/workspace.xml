@@ -4,25 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="intefaces and models">
-      <change afterPath="$PROJECT_DIR$/src/Application/Command/PlaceOrderCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Application/Service/OrderService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Domain/Model/Client/Client.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Domain/Model/Product/ProductId.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Http/Controller/OrderController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Repository/OrderRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Domain/Repository/ClientBalanceRepositoryTest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tests/Domain/Service/ClientBalanceService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="SOME CHANGES">
+      <change afterPath="$PROJECT_DIR$/src/Domain/Validator/OrderValidator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Doctrine/Repository/ClientRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Presentation/Controller/OrderController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Presentation/Validator/ValidationException.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Domain/Repository/ClientBalanceRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Repository/ClientBalanceRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Domain/Service/ClientBalanceService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Service/ClientBalanceService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Persistence/Doctrine/Repository/ClientBalanceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Persistence/Doctrine/Repository/ClientBalanceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/Domain/Repository/ClientBalanceRepositoryTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/Domain/Repository/ClientBalanceRepositoryTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,25 +189,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "PHPUnit.ClientBalanceRepositoryTest.executor": "Debug",
-    "PHPUnit.ClientBalanceRepositoryTest.testFindById.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/michal/projekty/iteo-rectuiment-task",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.stylelint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "php.override.implement.member.chooser.php.doc": "NONE",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;PHPUnit.ClientBalanceRepositoryTest.executor&quot;: &quot;Debug&quot;,
+    &quot;PHPUnit.ClientBalanceRepositoryTest.testFindById.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/michal/projekty/iteo-rectuiment-task&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Infrastructure/Http/Controller" />
@@ -260,7 +248,8 @@
       <workItem from="1718360140707" duration="351000" />
       <workItem from="1718360510477" duration="257000" />
       <workItem from="1718360776487" duration="529000" />
-      <workItem from="1718361319025" duration="10342000" />
+      <workItem from="1718361319025" duration="10642000" />
+      <workItem from="1718434257930" duration="5824000" />
     </task>
     <task id="LOCAL-00001" summary="INIT">
       <option name="closed" value="true" />
@@ -334,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718373853450</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="SOME CHANGES">
+      <option name="closed" value="true" />
+      <created>1718376256963</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718376256963</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,6 +345,7 @@
     <MESSAGE value="change in entity 2" />
     <MESSAGE value="ClientBalanceService and fix entity ClientBalance" />
     <MESSAGE value="intefaces and models" />
-    <option name="LAST_COMMIT_MESSAGE" value="intefaces and models" />
+    <MESSAGE value="SOME CHANGES" />
+    <option name="LAST_COMMIT_MESSAGE" value="SOME CHANGES" />
   </component>
 </project>

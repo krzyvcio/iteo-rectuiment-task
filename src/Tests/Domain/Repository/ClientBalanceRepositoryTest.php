@@ -18,6 +18,7 @@ class ClientBalanceRepositoryTest extends TestCase
         $this->repository = $this->createMock(ClientBalanceRepositoryInterface::class);
 
         // Create a sample ClientBalance for testing
+        //TODO: baza testowa
         $clientId = ClientId::fromString('some-client-id');
         $this->clientBalance = new ClientBalance($clientId, 100);
     }

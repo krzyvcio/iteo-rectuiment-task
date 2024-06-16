@@ -2,12 +2,18 @@
 
 namespace App\Domain\Model\Order;
 
+use App\Domain\Model\Product\ProductId;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class OrderId
 {
     private UuidInterface $id;
+
+    /**
+     * @var OrderItem[]
+     */
+    private array $items;
 
     private function __construct(UuidInterface $id)
     {
@@ -33,4 +39,36 @@ class OrderId
     {
         return $this->id->equals($other->id);
     }
+
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    public function addItem(OrderItem $item): void
+    {
+        $this->items[] = $item;
+    }
+
+    public function removeItem(OrderItem $item): void
+    {
+        $this->items = array_filter($this->items, fn(OrderItem $i) => $i->getProductId()->equals($item->getProductId()));
+    }
+
+    public function updateItem(OrderItem $item): void
+    {
+        $this->items = array_map(fn(OrderItem $i) => $i->getProductId()->equals($item->getProductId()) ? $item : $i, $this->items);
+    }
+
+    public function getItemByProductId(ProductId $productId): ?OrderItem
+    {
+        foreach ($this->items as $item) {
+            if ($item->getProductId()->equals($productId)) {
+                return $item;
+            }
+        }
+        return null;
+    }
+
+
 }
