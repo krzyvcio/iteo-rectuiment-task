@@ -2,9 +2,10 @@
 
 namespace App\Infrastructure\Http\Controller;
 
-use App\Application\Command\PlaceOrderCommand;
+use App\Application\Factory\PlaceOrderCommandFactory;
 use App\Application\Service\OrderService;
-use App\Domain\Service\ClientBalanceServiceInterface;
+use App\Domain\Exception\InsufficientBalanceException;
+use App\Domain\Exception\InvalidOrderDataException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,13 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OrderController extends AbstractController
 {
-    private OrderService $orderService;
-    private ClientBalanceServiceInterface $clientBalanceService;
-
-    public function __construct(OrderService $orderService, ClientBalanceServiceInterface $clientBalanceService)
+    public function __construct(
+        private OrderService             $orderService,
+        private PlaceOrderCommandFactory $placeOrderCommandFactory
+    )
     {
-        $this->orderService = $orderService;
-        $this->clientBalanceService = $clientBalanceService;
     }
 
     /**
@@ -26,27 +25,18 @@ class OrderController extends AbstractController
      */
     public function placeOrder(Request $request): Response
     {
-        $data = json_decode($request->getContent(), true);
+        try {
+            $data = json_decode($request->getContent(), true);
+            $command = $this->placeOrderCommandFactory->createFromArray($data);
+            $this->orderService->placeOrder($command);
 
-        $clientId = $data['clientId'];
-        $products = $data['products'];
-
-        if (!$this->clientBalanceService->hasEnoughBalance($clientId, $this->calculateTotalPrice($products))) {
-            return $this->json(['error' => 'Insufficient client balance'], Response::HTTP_BAD_REQUEST);
+            return $this->json(['message' => 'Order placed successfully'], Response::HTTP_OK);
+        } catch (InvalidOrderDataException $e) {
+            return $this->json(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        } catch (InsufficientBalanceException $e) {
+            return $this->json(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        } catch (\Exception $e) {
+            return $this->json(['error' => 'An error occurred'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-        $command = new PlaceOrderCommand($clientId, $products);
-        $this->orderService->placeOrder($command);
-
-        return $this->json(['message' => 'Order placed successfully'], Response::HTTP_OK);
-    }
-
-    private function calculateTotalPrice(array $products): float
-    {
-        $totalPrice = 0;
-        foreach ($products as $product) {
-            $totalPrice += $product['price'] * $product['quantity'];
-        }
-        return $totalPrice;
     }
 }

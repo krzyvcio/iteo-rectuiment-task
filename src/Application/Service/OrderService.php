@@ -3,7 +3,6 @@
 namespace App\Application\Service;
 
 use App\Application\Command\PlaceOrderCommand;
-use App\Domain\Model\Client\ClientId;
 use App\Domain\Model\Order\Order;
 use App\Domain\Model\Order\OrderId;
 use App\Domain\Model\Order\OrderItem;
@@ -11,6 +10,8 @@ use App\Domain\Model\Product\ProductId;
 use App\Domain\Repository\ClientRepositoryInterface;
 use App\Domain\Repository\OrderRepositoryInterface;
 use App\Domain\Service\ClientBalanceServiceInterface;
+use App\Domain\Validator\OrderValidator;
+use App\Presentation\Validator\ValidationException;
 
 class OrderService
 {
@@ -19,9 +20,10 @@ class OrderService
     private ClientBalanceServiceInterface $clientBalanceService;
 
     public function __construct(
-        OrderRepositoryInterface      $orderRepository,
-        ClientRepositoryInterface     $clientRepository,
-        ClientBalanceServiceInterface $clientBalanceService
+        OrderRepositoryInterface        $orderRepository,
+        ClientRepositoryInterface       $clientRepository,
+        ClientBalanceServiceInterface   $clientBalanceService,
+        private readonly OrderValidator $orderValidator
     )
     {
         $this->orderRepository = $orderRepository;
@@ -29,10 +31,16 @@ class OrderService
         $this->clientBalanceService = $clientBalanceService;
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function placeOrder(PlaceOrderCommand $command): void
     {
-        $clientId = ClientId::fromString($command->getClientId());
+        $clientId = $command->getOrder()->getClientId();
         $client = $this->clientRepository->findById($clientId);
+
+        //walidacja
+        $this->orderValidator->validate($command->getOrder());
 
         if ($client === null) {
             throw new \InvalidArgumentException('Client not found');

@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="changes">
+      <change afterPath="$PROJECT_DIR$/src/Application/Factory/PlaceOrderCommandFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Domain/Model/Order/OrderItemId.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Command/PlaceOrderCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Command/PlaceOrderCommand.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Application/Service/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Service/OrderService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Model/Order/OrderId.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Order/OrderId.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Domain/Validator/OrderValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Validator/OrderValidator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Presentation/Controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Presentation/Controller/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Http/Controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Http/Controller/OrderController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +251,7 @@
       <workItem from="1718360510477" duration="257000" />
       <workItem from="1718360776487" duration="529000" />
       <workItem from="1718361319025" duration="10642000" />
-      <workItem from="1718434257930" duration="9356000" />
+      <workItem from="1718434257930" duration="10587000" />
     </task>
     <task id="LOCAL-00001" summary="INIT">
       <option name="closed" value="true" />
@@ -345,7 +349,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718518476890</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="changes">
+      <option name="closed" value="true" />
+      <created>1718526272726</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1718526272726</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

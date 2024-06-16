@@ -15,6 +15,8 @@ class OrderValidator
     public function validate(Order $order): void
     {
         $validator = Validation::createValidator();
+
+
         $constraint = new Assert\Collection([
             'id' => new Assert\Uuid(),
             'clientId' => new Assert\Uuid(),

@@ -6,7 +6,7 @@ use App\Domain\Model\Product\ProductId;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-class OrderId
+class OrderId extends \App\Domain\Model\Order\Order
 {
     private UuidInterface $id;
 

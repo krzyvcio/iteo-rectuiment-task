@@ -2,31 +2,51 @@
 
 namespace App\Application\Command;
 
+use App\Domain\Model\Client\ClientId;
 use App\Domain\Model\Order\Order;
+use App\Domain\Model\Order\OrderId;
+use App\Domain\Model\Order\OrderItem;
 
 class PlaceOrderCommand
 {
-    private Order $order;
+    private OrderId $orderId;
+    private ClientId $clientId;
+    private array $items;
 
-    public function __construct(Order $order)
+    public function __construct(OrderId $orderId, ClientId $clientId, array $items)
     {
-        $this->order = $order;
+        $this->orderId = $orderId;
+        $this->clientId = $clientId;
+        $this->items = $items;
+    }
+
+    public function getOrderId(): OrderId
+    {
+        return $this->orderId;
     }
 
     public function getOrder(): Order
     {
-        return $this->order;
+        return new Order($this->orderId, $this->clientId, $this->items);
     }
 
-    public function getOrderId(): string
+    public function getClientId(): ClientId
     {
-        return $this->order->getId()->toString();
+        return $this->clientId;
     }
 
-    public function getProducts()
+    /**
+     * @return OrderItem[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    public function getProducts(): array
     {
         $products = [];
-        foreach ($this->order->getItems() as $item) {
+        foreach ($this->items as $item) {
             $products[] = [
                 'productId' => $item->getProductId()->toString(),
                 'quantity' => $item->getQuantity(),
