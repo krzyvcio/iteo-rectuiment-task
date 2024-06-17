@@ -5,14 +5,14 @@ namespace App\Infrastructure\Repository;
 use App\Domain\Model\Order\Order;
 use App\Domain\Model\Order\OrderId;
 use App\Domain\Repository\OrderRepositoryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class OrderRepository implements OrderRepositoryInterface
 {
-    private $entityManager;
 
-    public function __construct($entityManager)
+    public function __construct(
+        private EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     public function findById(OrderId $orderId): ?Order

@@ -5,7 +5,7 @@ namespace App\Domain\Model\Client;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity, ORM\Table(name: "client_balances")]
-class ClientBalance
+class ClientBalance extends \App\Domain\Model\Client\ClientId
 {
     #[ORM\Id, ORM\Column(type: "string")]
     private string $id;

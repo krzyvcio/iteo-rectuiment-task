@@ -6,15 +6,17 @@ class Client
 {
     private ClientId $id;
     private string $name;
-    private string $email;
+
+    private ClientBalance $balance;
+
+
     private bool $isBlocked;
 
-    public function __construct(ClientId $id, string $name, string $email, bool $isBlocked = false)
+    public function __construct(ClientId $id)
     {
         $this->id = $id;
-        $this->name = $name;
-        $this->email = $email;
-        $this->isBlocked = $isBlocked;
+        $this->isBlocked = false;
+
     }
 
     public function getId(): ClientId
@@ -27,23 +29,34 @@ class Client
         return $this->name;
     }
 
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
 
     public function isBlocked(): bool
     {
         return $this->isBlocked;
     }
 
-    public function block(): void
+    public function block(): self
     {
         $this->isBlocked = true;
     }
 
-    public function unblock(): void
+    public function unblock(): self
     {
         $this->isBlocked = false;
+    }
+
+    public function getBalance(): ClientBalance
+    {
+        return $this->balance;
+    }
+
+    public function setBalance(ClientBalance $balance): self
+    {
+        $this->balance = $balance;
+    }
+
+    public function setName(string $getName): self
+    {
+        $this->name = $getName;
     }
 }
