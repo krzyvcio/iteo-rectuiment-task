@@ -18,7 +18,7 @@ class ClientBalance extends \App\Domain\Model\Client\ClientId
     private ClientId $clientId;
 
     #[ORM\Column(type: "float")]
-    private float $balance;
+    private float $balance = 0.0;
 
     #[ORM\Column(type: "string")]
     private string $currency;
@@ -53,19 +53,13 @@ class ClientBalance extends \App\Domain\Model\Client\ClientId
         $this->balance += $amount;
     }
 
-    public function getCurrency(): string
-    {
-        return $this->currency;
-    }
-
-
     public function setBalance(float $balance): void
     {
         $this->balance = $balance;
     }
 
 
-    public function subtractBalance(float $amount)
+    public function subtractBalance(float $amount): void
     {
         $this->balance -= $amount;
     }
@@ -73,6 +67,11 @@ class ClientBalance extends \App\Domain\Model\Client\ClientId
     public function setCurrency(string $string): void
     {
         $this->currency = $string;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->currency;
     }
 
 

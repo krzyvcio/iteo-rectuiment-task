@@ -73,5 +73,14 @@ class Client
         $this->name = $getName;
     }
 
+    public function __toString(): string
+    {
+        return $this->id->toString();
+    }
+
+    public function getBalanceAmount(): float
+    {
+        return $this->balance->getBalance();
+    }
 
 }
