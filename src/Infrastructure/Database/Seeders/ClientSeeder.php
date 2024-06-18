@@ -24,8 +24,8 @@ class ClientSeeder
             $client->setName('Client ' . $i);
 
             $clientBalance = new ClientBalance($clientId);
-            $clientBalance->setId($clientId->toString()); // Set the ID of ClientBalance
-            $clientBalance->setBalance(1000.0 * $i); // Set balance as per your requirement
+            $clientBalance->setId($clientId->toString()); // ustawienie id jako string
+            $clientBalance->setBalance(1000.0 * $i); // ustawienie salda
             $clientBalance->setCurrency('USD');
             $client->setBalance($clientBalance);
 
