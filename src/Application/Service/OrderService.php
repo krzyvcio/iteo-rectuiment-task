@@ -17,23 +17,17 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class OrderService
 {
-    private OrderRepositoryInterface $orderRepository;
-    private ClientRepositoryInterface $clientRepository;
-    private ClientBalanceServiceInterface $clientBalanceService;
-    private EventDispatcher $eventDispatcher;
 
-    private OrderValidator $orderValidator;
 
     public function __construct(
-        OrderRepositoryInterface      $orderRepository,
-        ClientRepositoryInterface     $clientRepository,
-        ClientBalanceServiceInterface $clientBalanceService,
-        OrderValidator                $orderValidator
+        private OrderRepositoryInterface      $orderRepository,
+        private ClientRepositoryInterface     $clientRepository,
+        private ClientBalanceServiceInterface $clientBalanceService,
+        private OrderValidator                $orderValidator,
+        private EventDispatcher               $eventDispatcher
     )
     {
-        $this->orderRepository = $orderRepository;
-        $this->clientRepository = $clientRepository;
-        $this->clientBalanceService = $clientBalanceService;
+
     }
 
     /**
@@ -45,7 +39,11 @@ class OrderService
         $client = $this->clientRepository->findById($clientId);
 
         //walidacja
-        $this->orderValidator->validate($command->getOrder());
+        $validate = $this->orderValidator->validate($command->getOrder());
+
+        if (!$validate) {
+            throw new ValidationException('Invalid input order');
+        }
 
         if ($client === null) {
             throw new \InvalidArgumentException('Client not found');

@@ -45,16 +45,6 @@ class PlaceOrderCommand
 
     public function getProducts(): array
     {
-        $products = [];
-        foreach ($this->items as $item) {
-            $products[] = [
-                'productId' => $item->getProductId()->toString(),
-                'quantity' => $item->getQuantity(),
-                'price' => $item->getPrice(),
-                'weight' => $item->getWeight(),
-                'subtotal' => $item->getSubtotal()
-            ];
-        }
-        return $products;
+        return $this->items;
     }
 }
