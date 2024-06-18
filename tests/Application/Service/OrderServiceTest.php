@@ -13,6 +13,7 @@ use App\Domain\Service\ClientBalanceServiceInterface;
 use App\Domain\Validator\OrderValidator;
 use App\Presentation\Validator\ValidationException;
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class OrderServiceTest extends TestCase
@@ -50,15 +51,15 @@ class OrderServiceTest extends TestCase
 
         // Create input data for the placeOrder method
         $orderId = $this->createMock(OrderId::class);
-        $orderId->method('toString')->willReturn(\Ramsey\Uuid\Uuid::uuid4()->toString()); // Use Ramsey\Uuid to generate a UUID
+        $orderId->method('toString')->willReturn(Uuid::uuid4()->toString()); // Use Ramsey\Uuid to generate a UUID
         $clientId = $this->createMock(ClientId::class);
-        $clientId->method('toString')->willReturn(\Ramsey\Uuid\Uuid::uuid4()->toString()); // Use Ramsey\Uuid to generate a UUID
+        $clientId->method('toString')->willReturn(Uuid::uuid4()->toString()); // Use Ramsey\Uuid to generate a UUID
         $items = [
-            ['productId' => \Ramsey\Uuid\Uuid::uuid4(), 'quantity' => 6, 'price' => 100.0, 'weight' => 1000],
-            ['productId' => \Ramsey\Uuid\Uuid::uuid4(), 'quantity' => 6, 'price' => 200.0, 'weight' => 2000],
-            ['productId' => \Ramsey\Uuid\Uuid::uuid4(), 'quantity' => 9, 'price' => 300.0, 'weight' => 3000],
-            ['productId' => \Ramsey\Uuid\Uuid::uuid4(), 'quantity' => 5, 'price' => 400.0, 'weight' => 4000],
-            ['productId' => \Ramsey\Uuid\Uuid::uuid4(), 'quantity' => 6, 'price' => 500.0, 'weight' => 5000],
+            ['productId' => Uuid::uuid4(), 'quantity' => 6, 'price' => 100.0, 'weight' => 1000],
+            ['productId' => Uuid::uuid4(), 'quantity' => 6, 'price' => 200.0, 'weight' => 2000],
+            ['productId' => Uuid::uuid4(), 'quantity' => 9, 'price' => 300.0, 'weight' => 3000],
+            ['productId' => Uuid::uuid4(), 'quantity' => 5, 'price' => 400.0, 'weight' => 4000],
+            ['productId' => Uuid::uuid4(), 'quantity' => 6, 'price' => 500.0, 'weight' => 5000],
         ];
         $placeOrderCommand = new PlaceOrderCommand($orderId, $clientId, $items); // Pass the OrderId mock here
 
