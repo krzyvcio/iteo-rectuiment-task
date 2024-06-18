@@ -4,19 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="some changes">
-      <change afterPath="$PROJECT_DIR$/src/Application/Command/CreateClientCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Application/Service/ClientContractService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Application/Service/ClientRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Application/Service/ClientService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Domain/Validator/CreateClientContractValidator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Presentation/Controller/CrmResponseContractController.php" afterDir="false" />
+    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="migration">
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Console/SeedDatabaseCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Database/Seeders/ClientSeeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Infrastructure/Doctrine/Traits/TimestampableTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Application/Service/ClientContractContractServiceTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Command/CreateClientCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Command/CreateClientCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Service/ClientContractService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Service/ClientRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Service/ClientContractServiceInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Service/ClientService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Service/ClientContractContractService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Service/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Service/OrderService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Client/Client.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Repository/OrderRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Repository/OrderRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Presentation/Controller/CrmResponseController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/ClientId.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Client/ClientId.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Validator/OrderValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Validator/OrderValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Doctrine/UuidType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Doctrine/UuidType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Presentation/Controller/CrmResponseContractController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Presentation/Controller/CrmResponseContractController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Application/Factory/PlaceOrderCommandFactoryTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Application/Factory/PlaceOrderCommandFactoryTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,36 +201,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;PHPUnit.ClientBalanceRepositoryTest.executor&quot;: &quot;Debug&quot;,
-    &quot;PHPUnit.ClientBalanceRepositoryTest.testFindById.executor&quot;: &quot;Run&quot;,
-    &quot;PHPUnit.PlaceOrderCommandFactoryTest.executor&quot;: &quot;Run&quot;,
-    &quot;PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArray.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/michal/projekty/iteo-rectuiment-task&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;proofread&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "PHPUnit.ClientBalanceRepositoryTest.executor": "Debug",
+    "PHPUnit.ClientBalanceRepositoryTest.testFindById.executor": "Run",
+    "PHPUnit.ClientContractContractServiceTest.testCreateClient.executor": "Run",
+    "PHPUnit.PlaceOrderCommandFactoryTest.executor": "Run",
+    "PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArray.executor": "Run",
+    "PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArrayShoudlFailed.executor": "Run",
+    "PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArrayShouldFail.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/michal/projekty/iteo-rectuiment-task",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "php.override.implement.member.chooser.php.doc": "NONE",
+    "settings.editor.selected.configurable": "proofread",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Infrastructure/Http/Controller" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArray">
-    <configuration name="ClientBalanceRepositoryTest.testFindById" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Domain\Repository\ClientBalanceRepositoryTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/src/Tests/Domain/Repository/ClientBalanceRepositoryTest.php" method="testFindById" scope="Method" />
+  <component name="RunManager" selected="PHPUnit.ClientContractContractServiceTest.testCreateClient">
+    <configuration name="ClientContractContractServiceTest.testCreateClient" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Application\Service\ClientContractContractServiceTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Application/Service/ClientContractContractServiceTest.php" method="testCreateClient" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -239,11 +248,21 @@
       <TestRunner class="App\Tests\Application\Factory\PlaceOrderCommandFactoryTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Application/Factory/PlaceOrderCommandFactoryTest.php" method="testCreateFromArray" scope="Method" />
       <method v="2" />
     </configuration>
+    <configuration name="PlaceOrderCommandFactoryTest.testCreateFromArrayShoudlFailed" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Application\Factory\PlaceOrderCommandFactoryTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Application/Factory/PlaceOrderCommandFactoryTest.php" method="testCreateFromArrayShoudlFailed" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PlaceOrderCommandFactoryTest.testCreateFromArrayShouldFail" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Application\Factory\PlaceOrderCommandFactoryTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Application/Factory/PlaceOrderCommandFactoryTest.php" method="testCreateFromArrayShouldFail" scope="Method" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.ClientContractContractServiceTest.testCreateClient" />
+        <item itemvalue="PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArrayShouldFail" />
+        <item itemvalue="PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArrayShoudlFailed" />
         <item itemvalue="PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArray" />
         <item itemvalue="PHPUnit.PlaceOrderCommandFactoryTest" />
-        <item itemvalue="PHPUnit.ClientBalanceRepositoryTest.testFindById" />
       </list>
     </recent_temporary>
   </component>
@@ -268,7 +287,7 @@
       <workItem from="1718360776487" duration="529000" />
       <workItem from="1718361319025" duration="10642000" />
       <workItem from="1718434257930" duration="18669000" />
-      <workItem from="1718607755491" duration="3455000" />
+      <workItem from="1718607755491" duration="14714000" />
     </task>
     <task id="LOCAL-00001" summary="INIT">
       <option name="closed" value="true" />
@@ -414,7 +433,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718538479367</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="some changes">
+      <option name="closed" value="true" />
+      <created>1718611242370</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1718611242370</updated>
+    </task>
+    <task id="LOCAL-00020" summary="migration">
+      <option name="closed" value="true" />
+      <created>1718611257061</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1718611257061</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,6 +470,7 @@
     <MESSAGE value="testy były złe" />
     <MESSAGE value="testCreateFromArray" />
     <MESSAGE value="some changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="some changes" />
+    <MESSAGE value="migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="migration" />
   </component>
 </project>

@@ -3,6 +3,7 @@
 namespace App\Application\Service;
 
 use App\Application\Command\PlaceOrderCommand;
+use App\Domain\Event\OrderPlacedEvent;
 use App\Domain\Model\Order\Order;
 use App\Domain\Model\Order\OrderId;
 use App\Domain\Model\Order\OrderItem;
@@ -12,18 +13,22 @@ use App\Domain\Repository\OrderRepositoryInterface;
 use App\Domain\Service\ClientBalanceServiceInterface;
 use App\Domain\Validator\OrderValidator;
 use App\Presentation\Validator\ValidationException;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class OrderService
 {
     private OrderRepositoryInterface $orderRepository;
     private ClientRepositoryInterface $clientRepository;
     private ClientBalanceServiceInterface $clientBalanceService;
+    private EventDispatcher $eventDispatcher;
+
+    private OrderValidator $orderValidator;
 
     public function __construct(
-        OrderRepositoryInterface        $orderRepository,
-        ClientRepositoryInterface       $clientRepository,
-        ClientBalanceServiceInterface   $clientBalanceService,
-        private readonly OrderValidator $orderValidator
+        OrderRepositoryInterface      $orderRepository,
+        ClientRepositoryInterface     $clientRepository,
+        ClientBalanceServiceInterface $clientBalanceService,
+        OrderValidator                $orderValidator
     )
     {
         $this->orderRepository = $orderRepository;
@@ -64,7 +69,7 @@ class OrderService
 
         $order = new Order($orderId, $clientId, $orderItems);
 
-        if (!$this->isOrderValid($order)) {
+        if (!$this->orderValidator->isOrderValid($order)) {
             throw new \InvalidArgumentException('Invalid order');
         }
 
@@ -77,29 +82,7 @@ class OrderService
         $this->clientBalanceService->subtractBalance($clientId, $totalPrice);
         $this->orderRepository->save($order);
 
-        // TODO: Send order to CRM system as event
         $this->eventDispatcher->dispatch(new OrderPlacedEvent($order));
     }
 
-
-    private function isOrderValid(Order $order): bool
-    {
-        $orderItems = $order->getItems();
-
-        if (count($orderItems) < 5) {
-            return false;
-        }
-
-        // summary weight of all products in order
-        $totalWeight = 0;
-        foreach ($orderItems as $orderItem) {
-            $totalWeight += $orderItem->getWeight() * $orderItem->getQuantity();
-        }
-
-        if ($totalWeight > 24000) { // 24 tons in kilograms
-            return false;
-        }
-
-        return true;
-    }
 }

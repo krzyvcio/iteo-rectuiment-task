@@ -15,7 +15,6 @@ class CreateClientCommand
     {
         $this->clientId = $clientId;
         $this->name = $name;
-
     }
 
     public function getClientId(): ClientId

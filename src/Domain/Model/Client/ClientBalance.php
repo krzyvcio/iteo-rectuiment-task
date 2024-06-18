@@ -2,35 +2,35 @@
 
 namespace App\Domain\Model\Client;
 
+use App\Infrastructure\Doctrine\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity, ORM\Table(name: "client_balances")]
 class ClientBalance extends \App\Domain\Model\Client\ClientId
 {
+
+    use TimestampableTrait;
+
     #[ORM\Id, ORM\Column(type: "string")]
     private string $id;
-
 
     #[ORM\Column(type: "uuid", unique: true)]
     private ClientId $clientId;
 
     #[ORM\Column(type: "float")]
-    private float $balance = 0.0;
+    private float $balance;
 
     #[ORM\Column(type: "string")]
     private string $currency;
 
-    #[ORM\Column(type: "datetime")]
-    private \DateTime $updatedAt;
-
-    #[ORM\Column(type: "datetime")]
-    private \DateTime $createdAt;
 
     public function __construct(
         ClientId $clientId,
     )
     {
         $this->clientId = $clientId;
+        $this->id = $clientId->toString();
+        $this->prePersist();
     }
 
     public function getId(): string
@@ -58,33 +58,22 @@ class ClientBalance extends \App\Domain\Model\Client\ClientId
         return $this->currency;
     }
 
-    public function getUpdatedAt(): \DateTime
-    {
-        return $this->updatedAt;
-    }
-
-    public function getCreatedAt(): \DateTime
-    {
-        return $this->createdAt;
-    }
 
     public function setBalance(float $balance): void
     {
         $this->balance = $balance;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): void
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
-    public function setCreatedAt(\DateTime $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
 
     public function subtractBalance(float $amount)
     {
         $this->balance -= $amount;
     }
+
+    public function setCurrency(string $string): void
+    {
+        $this->currency = $string;
+    }
+
+
 }

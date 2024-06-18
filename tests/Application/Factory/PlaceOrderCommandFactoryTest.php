@@ -13,6 +13,7 @@ use Ramsey\Uuid\Uuid;
 
 class PlaceOrderCommandFactoryTest extends TestCase
 {
+    //ten test nie sprawdza walidacji danych wejściowych
     public function testCreateFromArray(): void
     {
         $factory = new PlaceOrderCommandFactory();

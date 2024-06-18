@@ -8,7 +8,7 @@ use App\Domain\Model\Client\ClientBalance;
 use App\Domain\Model\Client\ClientId;
 use App\Domain\Repository\ClientRepositoryInterface;
 
-class ClientService implements ClientServiceInterface
+class ClientContractContractService implements ClientContractServiceInterface
 {
     private ClientRepositoryInterface $clientRepository;
 
@@ -22,9 +22,9 @@ class ClientService implements ClientServiceInterface
         $clientBalance = new ClientBalance($command->getBalance());
         $clientId = ClientId::fromString($command->getClientId()->toString());
 
-        $client = (new Client($clientId))
-            ->setName($command->getName())
-            ->setBalance($clientBalance);
+        $client = new Client($clientId);
+        $client->setName($command->getName());
+        $client->setBalance($clientBalance);
 
 
         $this->clientRepository->save($client);

@@ -34,4 +34,25 @@ class OrderValidator
             throw new \App\Presentation\Validator\ValidationException($violations);
         }
     }
+
+    public function isOrderValid(Order $order): bool
+    {
+        $orderItems = $order->getItems();
+
+        if (count($orderItems) < 5) {
+            return false;
+        }
+
+        // summary weight of all products in order
+        $totalWeight = 0;
+        foreach ($orderItems as $orderItem) {
+            $totalWeight += $orderItem->getWeight() * $orderItem->getQuantity();
+        }
+
+        if ($totalWeight > 24000) { // 24 tons in kilograms
+            return false;
+        }
+
+        return true;
+    }
 }

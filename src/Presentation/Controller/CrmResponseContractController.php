@@ -3,7 +3,7 @@
 namespace App\Presentation\Controller;
 
 use App\Application\Command\CreateClientCommand;
-use App\Application\Service\ClientContractService;
+use App\Application\Service\ClientContractContractService;
 use App\Domain\Validator\CreateClientContractValidator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CrmResponseContractController extends AbstractController
 {
 
-    public function __construct(private ClientContractService         $clientService,
+    public function __construct(private ClientContractContractService $clientService,
                                 private CreateClientContractValidator $validator)
     {
 

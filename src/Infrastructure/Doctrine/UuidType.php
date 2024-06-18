@@ -17,12 +17,8 @@ class UuidType extends Type
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        if ($value === null) {
+        if ($value === null || !\Ramsey\Uuid\Uuid::isValid($value)) {
             return null;
-        }
-
-        if (!\Ramsey\Uuid\Uuid::isValid($value)) {
-            throw ConversionException::conversionFailed($value, self::UUID);
         }
 
         return \Ramsey\Uuid\Uuid::fromString($value);
@@ -36,6 +32,10 @@ class UuidType extends Type
 
         if ($value instanceof \Ramsey\Uuid\UuidInterface) {
             return $value->toString();
+        }
+
+        if (\Ramsey\Uuid\Uuid::isValid($value)) {
+            return $value;
         }
 
         throw ConversionException::conversionFailed($value, self::UUID);
