@@ -7,11 +7,11 @@ use GuzzleHttp\ClientInterface;
 
 class CrmOrderService
 {
-    private ClientInterface $httpClient;
 
-    public function __construct(ClientInterface $httpClient)
+    public function __construct(
+        private readonly ClientInterface $httpClient
+    )
     {
-        $this->httpClient = $httpClient;
     }
 
     public function sendOrder(PlaceOrderCommand $command): void

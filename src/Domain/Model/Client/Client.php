@@ -23,7 +23,7 @@ class Client
     #[ORM\JoinColumn(name: "balance_id", referencedColumnName: "id")]
     private ClientBalance $balance;
 
-    #[ORM\Column(type: "boolean")]
+    #[ORM\Column(type: "string", options: ["active", "blocked"])]
     private ClientStatus $isBlocked;
 
     public function __construct(ClientId $id)
