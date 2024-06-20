@@ -15,7 +15,7 @@ use App\Domain\Service\ClientBalanceServiceInterface;
 use App\Domain\Validator\OrderValidator;
 use App\Presentation\Validator\ValidationException;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 class OrderService
 {
@@ -26,7 +26,7 @@ class OrderService
         private readonly ClientRepositoryInterface     $clientRepository,
         private readonly ClientBalanceServiceInterface $clientBalanceService,
         private readonly OrderValidator                $orderValidator,
-        private readonly EventDispatcher               $eventDispatcher,
+        private readonly EventDispatcherInterface      $eventDispatcher,
         private readonly EntityManagerInterface        $entityManager,
     )
     {
