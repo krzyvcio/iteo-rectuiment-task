@@ -83,7 +83,7 @@ class OrderService
             throw new \InvalidArgumentException('Insufficient client balance');
         }
 
-        //robie tranzjakcje
+        //robię tranzakcje
         $this->entityManager->beginTransaction();
         try {
             $this->clientBalanceService->subtractBalance($clientId, $totalPrice);
