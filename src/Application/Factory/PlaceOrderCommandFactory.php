@@ -4,6 +4,7 @@ namespace App\Application\Factory;
 
 use App\Application\Command\PlaceOrderCommand;
 use App\Domain\Model\Client\ClientId;
+use App\Domain\Model\Order\Order;
 use App\Domain\Model\Order\OrderId;
 use App\Domain\Model\Order\OrderItem;
 use App\Domain\Model\Product\ProductId;
@@ -28,7 +29,7 @@ class PlaceOrderCommandFactory
         return new PlaceOrderCommand($orderId, $clientId, $items);
     }
 
-    public function createFromOrder(\App\Domain\Model\Order\Order $order): PlaceOrderCommand
+    public function createFromOrder(Order $order): PlaceOrderCommand
     {
         return new PlaceOrderCommand($order->getId(), $order->getClientId(), $order->getItems());
     }

@@ -33,11 +33,7 @@ class CrmResponseContractController extends AbstractController
             return new JsonResponse($errors, Response::HTTP_BAD_REQUEST);
         }
 
-        $command = new CreateClientCommand(
-            $data['clientId'],
-            $data['name'],
-            $data['balance']
-        );
+        $command = CreateClientCommand::fromArray($data);
 
         try {
             $this->clientService->createClient($command);
@@ -47,4 +43,5 @@ class CrmResponseContractController extends AbstractController
             return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
+
 }

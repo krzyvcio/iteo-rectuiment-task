@@ -4,6 +4,7 @@ namespace App\Application\Service;
 
 use App\Application\Command\PlaceOrderCommand;
 use App\Domain\Event\OrderPlacedEvent;
+use App\Domain\Exception\InvalidOrderDataException;
 use App\Domain\Model\Order\Order;
 use App\Domain\Model\Order\OrderId;
 use App\Domain\Model\Order\OrderItem;
@@ -13,6 +14,7 @@ use App\Domain\Repository\OrderRepositoryInterface;
 use App\Domain\Service\ClientBalanceServiceInterface;
 use App\Domain\Validator\OrderValidator;
 use App\Presentation\Validator\ValidationException;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class OrderService
@@ -20,11 +22,12 @@ class OrderService
 
 
     public function __construct(
-        private OrderRepositoryInterface      $orderRepository,
-        private ClientRepositoryInterface     $clientRepository,
-        private ClientBalanceServiceInterface $clientBalanceService,
-        private OrderValidator                $orderValidator,
-        private EventDispatcher               $eventDispatcher
+        private readonly OrderRepositoryInterface      $orderRepository,
+        private readonly ClientRepositoryInterface     $clientRepository,
+        private readonly ClientBalanceServiceInterface $clientBalanceService,
+        private readonly OrderValidator                $orderValidator,
+        private readonly EventDispatcher               $eventDispatcher,
+        private readonly EntityManagerInterface        $entityManager,
     )
     {
 
@@ -32,6 +35,7 @@ class OrderService
 
     /**
      * @throws ValidationException
+     * @throws InvalidOrderDataException
      */
     public function placeOrder(PlaceOrderCommand $command): void
     {
@@ -39,10 +43,10 @@ class OrderService
         $client = $this->clientRepository->findById($clientId);
 
         //walidacja
-        $validate = $this->orderValidator->validate($command->getOrder());
+        $validate = $this->orderValidator->validateInput($command->getOrder());
 
         if (!$validate) {
-            throw new ValidationException('Invalid input order');
+            throw new InvalidOrderDataException('Invalid input order');
         }
 
         if ($client === null) {
@@ -67,8 +71,10 @@ class OrderService
 
         $order = new Order($orderId, $clientId, $orderItems);
 
-        if (!$this->orderValidator->isOrderValid($order)) {
-            throw new \InvalidArgumentException('Invalid order');
+        $isOrderValid = $this->orderValidator->isOrderValid($order);
+
+        if (!$isOrderValid) {
+            throw new InvalidOrderDataException('Invalid order');
         }
 
         $totalPrice = $order->calculateTotalPrice();
@@ -77,10 +83,18 @@ class OrderService
             throw new \InvalidArgumentException('Insufficient client balance');
         }
 
-        $this->clientBalanceService->subtractBalance($clientId, $totalPrice);
-        $this->orderRepository->save($order);
+        //robie tranzjakcje
+        $this->entityManager->beginTransaction();
+        try {
+            $this->clientBalanceService->subtractBalance($clientId, $totalPrice);
+            $this->orderRepository->save($order);
+            $this->entityManager->commit();
+            $this->eventDispatcher->dispatch(new OrderPlacedEvent($order));
+        } catch (\Exception $e) {
+            $this->entityManager->rollback();
+            throw $e;
+        }
 
-        $this->eventDispatcher->dispatch(new OrderPlacedEvent($order));
     }
 
 }

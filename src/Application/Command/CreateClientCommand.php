@@ -9,12 +9,22 @@ class CreateClientCommand
 {
     private ClientId $clientId;
     private string $name;
-    private ClientBalance $balance;
+    private ClientBalance $clientBalance;
 
-    public function __construct(ClientId $clientId, string $name)
+    private function __construct(ClientId $clientId, string $name)
     {
         $this->clientId = $clientId;
         $this->name = $name;
+    }
+
+    public static function fromArray(array $data): self
+    {
+        $clientId = ClientId::fromString($data['clientId']);
+        $command = new self($clientId, $data['name']);
+        $clientBalance = ClientBalance::fromIdAndBalance($clientId, $data['balance']);
+        $command->setClientBalance($clientBalance);
+
+        return $command;
     }
 
     public function getClientId(): ClientId
@@ -27,13 +37,13 @@ class CreateClientCommand
         return $this->name;
     }
 
-    public function setClientBalance(ClientBalance $balance): void
+    public function getClientBalance(): ClientBalance
     {
-        $this->balance = $balance;
+        return $this->clientBalance;
     }
 
-    public function getBalance(): ClientBalance
+    public function setClientBalance(ClientBalance $clientBalance): void
     {
-        return $this->balance;
+        $this->clientBalance = $clientBalance;
     }
 }

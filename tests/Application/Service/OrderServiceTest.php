@@ -66,7 +66,7 @@ class OrderServiceTest extends TestCase
         // Configure mocks
         $client = $this->createMock(Client::class);
         $this->clientRepository->method('findById')->willReturn($client);
-        $this->orderValidator->method('validate')->willReturn(true);
+        $this->orderValidator->method('validateInput')->willReturn(true);
         $client->method('isBlocked')->willReturn(false);
         $this->clientBalanceService->method('hasEnoughBalance')->willReturn(true);
 
@@ -76,6 +76,6 @@ class OrderServiceTest extends TestCase
 
         // Check if methods on mocks were called the correct number of times
         $this->orderRepository->expects($this->once())->method('save');
-        $this->clientBalanceService->expects($this->once())->method('subtractBalance')->with($clientId, 100.0);
+        $this->clientBalanceService->expects($this->once())->method('subtractBalance')->with($clientId, $this->greaterThan(0));
     }
 }

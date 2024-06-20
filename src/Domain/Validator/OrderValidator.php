@@ -13,7 +13,7 @@ class OrderValidator
     /**
      * @throws ValidationException
      */
-    public function validate(Order $order): bool
+    public function validateInput(Order $order): bool
     {
         $validator = Validation::createValidator();
 
@@ -30,6 +30,15 @@ class OrderValidator
             ]),
         ]);
 
+        $orderItems = array_map(function ($itemData) {
+            return new OrderItem(
+                ProductId::fromString($itemData['productId']),
+                $itemData['quantity'],
+                $itemData['price'],
+                $itemData['weight']
+            );
+        }, $order->getItems());
+
         $data = [
             'id' => $order->getId()->toString(),
             'clientId' => $order->getClientId()->toString(),
@@ -40,7 +49,7 @@ class OrderValidator
                     'price' => $item->getPrice(),
                     'weight' => $item->getWeight(),
                 ];
-            }, $order->getItems()),
+            }, $orderItems),
         ];
 
         $violations = $validator->validate($data, $constraint);
@@ -50,7 +59,6 @@ class OrderValidator
             foreach ($violations as $violation) {
                 $errors[] = $violation->getPropertyPath() . ': ' . $violation->getMessage();
             }
-
             throw new ValidationException(implode(', ', $errors));
         }
 
@@ -58,9 +66,6 @@ class OrderValidator
     }
 
 
-    /**
-     * @throws ValidationException
-     */
     public function isOrderValid(Order $order): bool
     {
         $orderItems = $order->getItems();

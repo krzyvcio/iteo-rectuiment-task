@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="README.md">
-      <change afterPath="$PROJECT_DIR$/tests/Domain/Service/ClientBalanceServiceTest.php" afterDir="false" />
+    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="CHANGES">
+      <change afterPath="$PROJECT_DIR$/tests/Presentation/Controller/CrmResponseContractControllerTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Command/CreateClientCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Command/CreateClientCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Factory/PlaceOrderCommandFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Factory/PlaceOrderCommandFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Service/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Service/OrderService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Client/ClientBalance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Infrastructure/Database/Seeders/ClientSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Infrastructure/Database/Seeders/ClientSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/ClientId.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Client/ClientId.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Validator/OrderValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Validator/OrderValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Presentation/Controller/CrmResponseContractController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Presentation/Controller/CrmResponseContractController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Application/Service/OrderServiceTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Application/Service/OrderServiceTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,13 +198,22 @@
     "PHPUnit.ClientBalanceRepositoryTest.executor": "Debug",
     "PHPUnit.ClientBalanceRepositoryTest.testFindById.executor": "Run",
     "PHPUnit.ClientBalanceServiceTest.testAddBalance.executor": "Run",
+    "PHPUnit.ClientBalanceServiceTest.testGetBalance.executor": "Run",
     "PHPUnit.ClientBalanceServiceTest.testGetClientBalance (1).executor": "Run",
     "PHPUnit.ClientBalanceServiceTest.testGetClientBalance.executor": "Run",
+    "PHPUnit.ClientBalanceServiceTest.testHasEnoughBalance.executor": "Run",
+    "PHPUnit.ClientBalanceServiceTest.testSubtractBalance.executor": "Run",
     "PHPUnit.ClientContractContractServiceTest.testCreateClient.executor": "Run",
+    "PHPUnit.CrmResponseContractControllerTest.testCreateClient.executor": "Run",
+    "PHPUnit.CrmResponseContractControllerTest.testCreateClientWithInvalidData.executor": "Run",
+    "PHPUnit.OrderServiceTest.executor": "Run",
+    "PHPUnit.OrderServiceTest.testIsOrderValid.executor": "Run",
+    "PHPUnit.OrderServiceTest.testPlaceOrder.executor": "Run",
     "PHPUnit.PlaceOrderCommandFactoryTest.executor": "Run",
     "PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArray.executor": "Run",
     "PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArrayShoudlFailed.executor": "Run",
     "PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArrayShouldFail.executor": "Run",
+    "PHPUnit.testIsOrderValid.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/home/michal/projekty/iteo-rectuiment-task",
@@ -220,38 +235,38 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.ClientBalanceServiceTest.testAddBalance">
-    <configuration name="ClientBalanceServiceTest.testAddBalance" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="App\Tests\Domain\Service\ClientBalanceServiceTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Domain/Service/ClientBalanceServiceTest.php" method="testAddBalance" scope="Method" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ClientBalanceServiceTest.testGetClientBalance (1)" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="App\Tests\Domain\Service\ClientBalanceServiceTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Domain/Service/ClientBalanceServiceTest.php" method="testGetClientBalance" scope="Method" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ClientBalanceServiceTest.testGetClientBalance" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Domain\Service\ClientBalanceServiceTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Domain/Service/ClientBalanceServiceTest.php" method="testGetClientBalance" scope="Method" />
+  <component name="RunManager" selected="PHPUnit.ClientBalanceServiceTest.testGetBalance">
+    <configuration name="ClientBalanceServiceTest.testGetBalance" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Domain\Service\ClientBalanceServiceTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Domain/Service/ClientBalanceServiceTest.php" method="testGetBalance" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="ClientContractContractServiceTest.testCreateClient" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Application\Service\ClientContractContractServiceTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Application/Service/ClientContractContractServiceTest.php" method="testCreateClient" scope="Method" />
       <method v="2" />
     </configuration>
+    <configuration name="CrmResponseContractControllerTest.testCreateClient" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Presentation\Controller\CrmResponseContractControllerTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Presentation/Controller/CrmResponseContractControllerTest.php" method="testCreateClient" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CrmResponseContractControllerTest.testCreateClientWithInvalidData" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Presentation\Controller\CrmResponseContractControllerTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Presentation/Controller/CrmResponseContractControllerTest.php" method="testCreateClientWithInvalidData" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
-    <configuration name="PlaceOrderCommandFactoryTest.testCreateFromArrayShouldFail" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="App\Tests\Application\Factory\PlaceOrderCommandFactoryTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Application/Factory/PlaceOrderCommandFactoryTest.php" method="testCreateFromArrayShouldFail" scope="Method" />
+    <configuration name="OrderServiceTest.testPlaceOrder" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="App\Tests\Application\Service\OrderServiceTest" configuration_file="$PROJECT_DIR$/phpunit.xml.dist" file="$PROJECT_DIR$/tests/Application/Service/OrderServiceTest.php" method="testPlaceOrder" scope="Method" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="PHPUnit.ClientBalanceServiceTest.testAddBalance" />
-        <item itemvalue="PHPUnit.ClientBalanceServiceTest.testGetClientBalance (1)" />
-        <item itemvalue="PHPUnit.ClientBalanceServiceTest.testGetClientBalance" />
+        <item itemvalue="PHPUnit.ClientBalanceServiceTest.testGetBalance" />
+        <item itemvalue="PHPUnit.CrmResponseContractControllerTest.testCreateClientWithInvalidData" />
+        <item itemvalue="PHPUnit.CrmResponseContractControllerTest.testCreateClient" />
+        <item itemvalue="PHPUnit.OrderServiceTest.testPlaceOrder" />
         <item itemvalue="PHPUnit.ClientContractContractServiceTest.testCreateClient" />
-        <item itemvalue="PHPUnit.PlaceOrderCommandFactoryTest.testCreateFromArrayShouldFail" />
       </list>
     </recent_temporary>
   </component>
@@ -276,7 +291,9 @@
       <workItem from="1718360776487" duration="529000" />
       <workItem from="1718361319025" duration="10642000" />
       <workItem from="1718434257930" duration="18669000" />
-      <workItem from="1718607755491" duration="16214000" />
+      <workItem from="1718607755491" duration="25776000" />
+      <workItem from="1718772955383" duration="1693000" />
+      <workItem from="1718861251640" duration="4387000" />
     </task>
     <task id="LOCAL-00001" summary="INIT">
       <option name="closed" value="true" />
@@ -462,7 +479,31 @@
       <option name="project" value="LOCAL" />
       <updated>1718689670887</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="some tests">
+      <option name="closed" value="true" />
+      <created>1718691761360</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1718691761360</updated>
+    </task>
+    <task id="LOCAL-00025" summary="CHANGES">
+      <option name="closed" value="true" />
+      <created>1718702378717</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1718702378717</updated>
+    </task>
+    <task id="LOCAL-00026" summary="CHANGES">
+      <option name="closed" value="true" />
+      <created>1718702436909</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1718702436909</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,6 +528,15 @@
     <MESSAGE value="seeders and changes" />
     <MESSAGE value="komcie po polsku" />
     <MESSAGE value="README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="README.md" />
+    <MESSAGE value="some tests" />
+    <MESSAGE value="CHANGES" />
+    <option name="LAST_COMMIT_MESSAGE" value="CHANGES" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PHPUnitRunConfigurationType">
+        <watch expression="$data[&quot;balance&quot;]" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -4,9 +4,10 @@ namespace App\Domain\Model\Client;
 
 use App\Infrastructure\Doctrine\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 
 #[ORM\Entity, ORM\Table(name: "client_balances")]
-class ClientBalance extends \App\Domain\Model\Client\ClientId
+class ClientBalance extends ClientId
 {
 
     use TimestampableTrait;
@@ -24,13 +25,10 @@ class ClientBalance extends \App\Domain\Model\Client\ClientId
     private string $currency;
 
 
-    public function __construct(
-        ClientId $clientId,
-    )
+    public function __construct(ClientId $clientId, int $balance)
     {
-        $this->clientId = $clientId;
-        $this->id = $clientId->toString();
-        $this->prePersist();
+        parent::__construct($clientId->toString());
+        $this->balance = $balance;
     }
 
     public function getId(): string
@@ -74,5 +72,15 @@ class ClientBalance extends \App\Domain\Model\Client\ClientId
         return $this->currency;
     }
 
+    public function __toString(): string
+    {
+        return $this->balance . ' ' . $this->currency;
+    }
+
+    public static function fromIdAndBalance(string $id, int $balance): self
+    {
+        $uuid = Uuid::fromString($id);  // Ensure this returns a UuidInterface
+        return new self(new ClientId($uuid), $balance);
+    }
 
 }
