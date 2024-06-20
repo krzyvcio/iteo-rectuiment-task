@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Validation;
 class CreateClientContractValidator
 {
 
-    public function validate(array $data): array
+    public function validateClient(array $data): array
     {
         $validator = Validation::createValidator();
 
@@ -49,6 +49,22 @@ class CreateClientContractValidator
         ]);
 
         $violations = $validator->validate($data, $constraints);
+
+        $errors = [];
+        foreach ($violations as $violation) {
+            $errors[$violation->getPropertyPath()][] = $violation->getMessage();
+        }
+
+        return $errors;
+    }
+
+    public function validateClientId(string $clientId)
+    {
+        $validator = Validation::createValidator();
+
+        $violations = $validator->validate($clientId, [
+            new Assert\Uuid()
+        ]);
 
         $errors = [];
         foreach ($violations as $violation) {

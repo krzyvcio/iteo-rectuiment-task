@@ -22,7 +22,7 @@ class CrmResponseContractController extends AbstractController
         private ClientContractContractService $clientService,
         private CreateClientContractValidator $validator,
         private ClientBalanceServiceInterface $clientBalanceService,
-        private ClientIdRepositoryInterface $clientIdService,
+        private ClientIdRepositoryInterface   $clientIdService,
     )
     {
 
@@ -34,7 +34,7 @@ class CrmResponseContractController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        $errors = $this->validator->validate($data);
+        $errors = $this->validator->validateClient($data);
 
         if (count($errors) > 0) {
             return new JsonResponse($errors, Response::HTTP_BAD_REQUEST);
@@ -68,11 +68,34 @@ class CrmResponseContractController extends AbstractController
         $command = TopupCommand::fromArray($data);
 
         try {
-            $clientId =  $this->clientIdService->findById($clientId)
+            $clientId = $this->clientIdService->findById($clientId);
             // Wywołanie serwisu do obsługi doładowania salda klienta
             $this->clientBalanceService->topupBalance($clientId, $command->getAmount());
 
             return new JsonResponse(['message' => 'Client balance topped up successfully'], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        }
+
+
+    }
+
+    #[Route('/api/clients/{clientId}/block', name: 'block_client', methods: ['POST'])]
+    public function blockClient(Request $request, string $clientId): JsonResponse
+    {
+        // Walidacja clientId
+        $errors = $this->validator->validateClientId($clientId);
+
+        if (count($errors) > 0) {
+            return new JsonResponse($errors, Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+            $clientId = $this->clientIdService->findById($clientId);
+            // Wywołanie serwisu do blokowania klienta
+            $this->clientService->blockClient($clientId);
+
+            return new JsonResponse(['message' => 'Client blocked successfully'], Response::HTTP_OK);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }

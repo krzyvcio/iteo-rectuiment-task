@@ -2,6 +2,7 @@
 
 namespace App\Domain\Model\Client;
 
+use App\Domain\Model\Client\Enum\ClientStatus;
 use App\Infrastructure\Doctrine\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,12 +24,12 @@ class Client
     private ClientBalance $balance;
 
     #[ORM\Column(type: "boolean")]
-    private bool $isBlocked;
+    private ClientStatus $isBlocked;
 
     public function __construct(ClientId $id)
     {
         $this->id = $id;
-        $this->isBlocked = false;
+        $this->isBlocked = ClientStatus::ACTIVE;
         $this->prePersist();
     }
 
@@ -43,19 +44,19 @@ class Client
     }
 
 
-    public function isBlocked(): bool
+    public function isBlocked(): ClientStatus
     {
         return $this->isBlocked;
     }
 
     public function block(): void
     {
-        $this->isBlocked = true;
+        $this->isBlocked = ClientStatus::BLOCKED;
     }
 
     public function unblock(): void
     {
-        $this->isBlocked = false;
+        $this->isBlocked = ClientStatus::ACTIVE;
     }
 
     public function getBalance(): ClientBalance

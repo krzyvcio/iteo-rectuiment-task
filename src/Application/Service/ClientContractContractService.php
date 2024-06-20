@@ -7,14 +7,18 @@ use App\Domain\Model\Client\Client;
 use App\Domain\Model\Client\ClientBalance;
 use App\Domain\Model\Client\ClientId;
 use App\Domain\Repository\ClientRepositoryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ClientContractContractService implements ClientContractServiceInterface
 {
-    private ClientRepositoryInterface $clientRepository;
 
-    public function __construct(ClientRepositoryInterface $clientRepository)
+    public function __construct(
+        private readonly ClientRepositoryInterface $clientRepository,
+        private readonly EntityManagerInterface    $entityManager
+
+    )
     {
-        $this->clientRepository = $clientRepository;
+
     }
 
     public function createClient(CreateClientCommand $command): Client
@@ -35,5 +39,27 @@ class ClientContractContractService implements ClientContractServiceInterface
     public function getClientById(ClientId $clientId): ?Client
     {
         return $this->clientRepository->findByClientId($clientId);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function blockClient(ClientId $clientId): void
+    {
+        $client = $this->clientRepository->findByClientId($clientId);
+
+        if ($client === null) {
+            throw new \InvalidArgumentException('Client not found');
+        }
+
+        $this->entityManager->beginTransaction();
+        try {
+            $client->block();
+            $this->clientRepository->update($client);
+            $this->entityManager->commit();
+        } catch (\Exception $e) {
+            $this->entityManager->rollback();
+            throw $e;
+        }
     }
 }

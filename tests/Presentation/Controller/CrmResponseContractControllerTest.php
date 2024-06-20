@@ -30,7 +30,7 @@ class CrmResponseContractControllerTest extends TestCase
             ->willReturn('{"clientId": "49a085cc-1ac4-45f6-ae17-c8275b43132a", "name": "John Doe"}');
 
         $this->validator->expects($this->once())
-            ->method('validate')
+            ->method('validateClient')
             ->willReturn(['error' => 'Invalid data']);
 
         $response = $this->controller->createClient($request);
