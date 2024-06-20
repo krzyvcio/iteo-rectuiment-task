@@ -7,7 +7,7 @@ use App\Domain\Model\Client\ClientId;
 
 interface ClientRepositoryInterface
 {
-    public function findById(ClientId $clientId): ?Client;
+    public function findByClientId(ClientId $clientId): ?Client;
 
     public function save(Client $client): void;
 

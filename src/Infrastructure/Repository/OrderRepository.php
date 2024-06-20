@@ -6,6 +6,8 @@ use App\Domain\Model\Order\Order;
 use App\Domain\Model\Order\OrderId;
 use App\Domain\Repository\OrderRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -15,7 +17,11 @@ class OrderRepository implements OrderRepositoryInterface
     {
     }
 
-    public function findById(OrderId $orderId): ?Order
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
+    public function findByOrderId(OrderId $orderId): ?Order
     {
         return $this->entityManager->find(Order::class, $orderId);
     }

@@ -51,5 +51,5 @@ class ClientId
     {
         return $this->id->toString();
     }
-    
+
 }

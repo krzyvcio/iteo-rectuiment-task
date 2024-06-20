@@ -65,7 +65,7 @@ class OrderServiceTest extends TestCase
 
         // Configure mocks
         $client = $this->createMock(Client::class);
-        $this->clientRepository->method('findById')->willReturn($client);
+        $this->clientRepository->method('findByClientId')->willReturn($client);
         $this->orderValidator->method('validateInput')->willReturn(true);
         $client->method('isBlocked')->willReturn(false);
         $this->clientBalanceService->method('hasEnoughBalance')->willReturn(true);

@@ -34,6 +34,6 @@ class ClientContractContractService implements ClientContractServiceInterface
 
     public function getClientById(ClientId $clientId): ?Client
     {
-        return $this->clientRepository->findById($clientId);
+        return $this->clientRepository->findByClientId($clientId);
     }
 }

@@ -40,7 +40,7 @@ class OrderService
     public function placeOrder(PlaceOrderCommand $command): void
     {
         $clientId = $command->getOrder()->getClientId();
-        $client = $this->clientRepository->findById($clientId);
+        $client = $this->clientRepository->findByClientId($clientId);
 
         //walidacja
         $validate = $this->orderValidator->validateInput($command->getOrder());

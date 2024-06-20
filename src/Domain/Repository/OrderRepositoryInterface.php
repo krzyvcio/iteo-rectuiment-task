@@ -8,7 +8,7 @@ use App\Domain\Model\Order\OrderId;
 interface OrderRepositoryInterface
 {
 
-    public function findById(OrderId $orderId): ?Order;
+    public function findByOrderId(OrderId $orderId): ?Order;
 
     public function save(Order $order): void;
 

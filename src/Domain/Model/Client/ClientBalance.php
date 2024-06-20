@@ -27,7 +27,7 @@ class ClientBalance extends ClientId
 
     public function __construct(ClientId $clientId, int $balance)
     {
-        parent::__construct($clientId->toString());
+        parent::__construct();
         $this->balance = $balance;
     }
 

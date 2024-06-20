@@ -9,14 +9,14 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ClientRepository implements ClientRepositoryInterface
 {
-    private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    )
     {
-        $this->entityManager = $entityManager;
     }
 
-    public function findById(ClientId $clientId): ?Client
+    public function findByClientId(ClientId $clientId): ?Client
     {
         return $this->entityManager->getRepository(Client::class)->findOneBy(['id' => $clientId->toString()]);
     }

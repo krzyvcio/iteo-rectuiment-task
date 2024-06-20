@@ -14,4 +14,6 @@ interface ClientBalanceServiceInterface
     public function subtractBalance(ClientId $clientId, float $amount): void;
 
     public function hasEnoughBalance(ClientId $clientId, float $amount): bool;
+
+    public function topupBalance(ClientId $clientId, int $getAmount);
 }

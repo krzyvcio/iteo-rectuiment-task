@@ -36,4 +36,25 @@ class CreateClientContractValidator
 
         return $errors;
     }
+
+    public function validateTopupData(mixed $data)
+    {
+        $validator = Validation::createValidator();
+
+        $constraints = new Assert\Collection([
+            'amount' => [
+                new Assert\NotBlank(),
+                new Assert\Type('integer'),
+            ]
+        ]);
+
+        $violations = $validator->validate($data, $constraints);
+
+        $errors = [];
+        foreach ($violations as $violation) {
+            $errors[$violation->getPropertyPath()][] = $violation->getMessage();
+        }
+
+        return $errors;
+    }
 }
