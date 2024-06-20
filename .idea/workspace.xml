@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="fix">
+    <list default="true" id="8d367e80-3c3c-491b-b23d-b35099c70b8e" name="Changes" comment="refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Service/CrmOrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Service/CrmOrderService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Domain/Model/Client/Client.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Domain/Model/Client/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,7 +288,7 @@
       <workItem from="1718434257930" duration="18669000" />
       <workItem from="1718607755491" duration="25776000" />
       <workItem from="1718772955383" duration="1693000" />
-      <workItem from="1718861251640" duration="19097000" />
+      <workItem from="1718861251640" duration="19833000" />
     </task>
     <task id="LOCAL-00001" summary="INIT">
       <option name="closed" value="true" />
@@ -535,7 +538,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718879704309</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="refactor">
+      <option name="closed" value="true" />
+      <created>1718893837099</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1718893837099</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -565,7 +576,8 @@
     <MESSAGE value="some changes" />
     <MESSAGE value="block client" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
